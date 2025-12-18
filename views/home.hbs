@@ -1,0 +1,165 @@
+{{#if success}}
+<div class="alert alert-success">
+    <p>Connexion réussie ! Bienvenue sur AutoPièces Expert.</p>
+</div>
+{{/if}}
+
+{{#if error}}
+<div class="alert alert-error">
+    <p>{{error}}</p>
+</div>
+{{/if}}
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">AutoPièces Expert</h1>
+            <p class="hero-subtitle">Votre spécialiste en pièces automobiles, moteurs et accessoires</p>
+            <p class="hero-description">
+                Depuis 2010, nous sommes votre partenaire de confiance pour tous vos besoins en pièces automobiles, 
+                moteurs et accessoires. Qualité professionnelle, expertise technique et service client exceptionnel.
+            </p>
+            <div class="hero-actions">
+                <a href="/products" class="btn btn-primary btn-lg">Découvrir nos produits</a>
+                <a href="#services" class="btn btn-secondary btn-lg">Nos services</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section about-section">
+    <div class="container">
+        <h2 class="section-title">À propos de nous</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Notre Mission</h3>
+                <p>
+                    AutoPièces Expert a pour mission de fournir des solutions complètes et de qualité supérieure 
+                    pour tous vos besoins en pièces automobiles et moteurs. Nous nous engageons à offrir :
+                </p>
+                <ul>
+                    <li><strong>Qualité garantie</strong> : Tous nos produits sont testés et certifiés</li>
+                    <li><strong>Expertise technique</strong> : Une équipe d'experts à votre service</li>
+                    <li><strong>Service client</strong> : Support et conseils personnalisés</li>
+                    <li><strong>Livraison rapide</strong> : Expédition sous 24-48h</li>
+                </ul>
+            </div>
+            <div class="about-image">
+                <div class="mission-image">
+                    <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&h=600&fit=crop&q=80" 
+                         alt="Moteur automobile en réparation - AutoPièces Expert" 
+                         class="mission-img"
+                         loading="lazy"
+                         onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&q=80'">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="section services-section">
+    <div class="container">
+        <h2 class="section-title">Nos Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Pièces Automobiles</h3>
+                <p>Large gamme de pièces détachées pour tous types de véhicules</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Moteurs Complets</h3>
+                <p>Moteurs neufs et reconditionnés pour toutes marques</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💧</div>
+                <h3>Moteurs Hydrauliques</h3>
+                <p>Solutions hydrauliques professionnelles et industrielles</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛠️</div>
+                <h3>Accessoires & Filtres</h3>
+                <p>Accessoires, huiles et filtres de qualité professionnelle</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📞</div>
+                <h3>Conseil Expert</h3>
+                <p>Assistance technique et conseils personnalisés</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚚</div>
+                <h3>Livraison Rapide</h3>
+                <p>Expédition sous 24-48h partout en France</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products Section -->
+{{#if featuredProducts}}
+<section class="section featured-section">
+    <div class="container">
+        <h2 class="section-title">Produits en vedette</h2>
+        <div class="products-grid">
+            {{#each featuredProducts}}
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="{{image}}" alt="{{name}}" onerror="this.src='/images/placeholder.jpg'">
+                    {{#if isAvailable}}
+                    <span class="product-badge stock-badge">En stock</span>
+                    {{else}}
+                    <span class="product-badge out-of-stock-badge">Rupture</span>
+                    {{/if}}
+                </div>
+                <div class="product-info">
+                    <span class="product-category">{{category}}</span>
+                    <h3 class="product-name">{{name}}</h3>
+                    {{#if engineType}}
+                    <div class="product-spec-item">
+                        <span class="spec-label">Type:</span>
+                        <span class="spec-value">{{engineType}}</span>
+                    </div>
+                    {{/if}}
+                    <div class="product-description-preview">
+                        <p>{{description}}</p>
+                    </div>
+                    <div class="product-price-section">
+                        <p class="product-price">{{formatPrice price}}</p>
+                    </div>
+                    <div class="product-actions">
+                        <a href="/products/{{_id}}" class="btn btn-primary btn-sm">Détails</a>
+                        {{#if isAvailable}}
+                        <button class="btn btn-secondary btn-sm add-to-cart-btn" data-product-id="{{_id}}">Commander</button>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div class="section-footer">
+            <a href="/products" class="btn btn-secondary">Voir tous les produits</a>
+        </div>
+    </div>
+</section>
+{{/if}}
+
+<!-- Login Modal -->
+<div class="modal" id="login-modal">
+    <div class="modal-content">
+        <span class="modal-close" id="modal-close">&times;</span>
+        <h2>Connexion</h2>
+        <p>Entrez votre adresse email pour recevoir un lien de connexion sécurisé.</p>
+        <form id="magic-link-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Envoyer le lien de connexion</button>
+        </form>
+        <div id="login-message" class="alert" style="display: none;"></div>
+    </div>
+</div>
+

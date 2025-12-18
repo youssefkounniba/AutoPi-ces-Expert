@@ -1,0 +1,30 @@
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-text">AutoPièces Expert</span>
+                </a>
+            </div>
+            
+            <nav class="nav">
+                <a href="/" class="nav-link">Accueil</a>
+                <a href="/products" class="nav-link">Produits</a>
+                <a href="/#services" class="nav-link">Services</a>
+                <a href="/#about" class="nav-link">À propos</a>
+            </nav>
+            
+            <div class="header-actions">
+                {{#if isAuthenticated}}
+                    <div class="user-menu">
+                        <span class="user-name">{{user.name}}</span>
+                        <button class="btn btn-secondary btn-sm" id="logout-btn">Déconnexion</button>
+                    </div>
+                {{else}}
+                    <button class="btn btn-primary btn-sm" id="login-btn">Connexion</button>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</header>
+

@@ -1,0 +1,133 @@
+<section class="section product-detail-section">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Accueil</a> / 
+            <a href="/products">Produits</a> / 
+            <span>{{product.name}}</span>
+        </div>
+        
+        <div class="product-detail-container">
+            <div class="product-detail-image-wrapper">
+                <div class="product-detail-image">
+                    {{#if product.image}}
+                    <img src="{{product.image}}" alt="{{product.name}}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&q=80';">
+                    {{else}}
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&q=80" alt="{{product.name}}" loading="lazy">
+                    {{/if}}
+                </div>
+                {{#if product.isAvailable}}
+                <div class="product-availability-badge">
+                    <span class="badge badge-success">✓ En stock ({{product.stock}} unités)</span>
+                </div>
+                {{else}}
+                <div class="product-availability-badge">
+                    <span class="badge badge-error">✗ Rupture de stock</span>
+                </div>
+                {{/if}}
+            </div>
+            
+            <div class="product-detail-info">
+                <!-- En-tête produit -->
+                <div class="product-header-info">
+                    <span class="product-category">{{product.category}}</span>
+                    <h1 class="product-detail-name">{{product.name}}</h1>
+                    <div class="product-price-main">
+                        <p class="product-detail-price">{{formatPrice product.price}}</p>
+                    </div>
+                </div>
+                
+                <!-- Informations principales -->
+                <div class="product-main-info">
+                    {{#if product.engineType}}
+                    <div class="info-card">
+                        <div class="info-icon">⚙️</div>
+                        <div class="info-content">
+                            <span class="info-label">Type de moteur</span>
+                            <span class="info-value">{{product.engineType}}</span>
+                        </div>
+                    </div>
+                    {{/if}}
+                    
+                    <div class="info-card">
+                        <div class="info-icon">📦</div>
+                        <div class="info-content">
+                            <span class="info-label">Stock disponible</span>
+                            <span class="info-value">{{product.stock}} unités</span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon">🚚</div>
+                        <div class="info-content">
+                            <span class="info-label">Livraison</span>
+                            <span class="info-value">24-48h</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Description -->
+                <div class="product-detail-description">
+                    <h3><span class="section-icon">📝</span> Description</h3>
+                    <p>{{product.description}}</p>
+                </div>
+                
+                <!-- Spécifications -->
+                {{#if product.specifications}}
+                <div class="product-specifications">
+                    <h3><span class="section-icon">🔧</span> Spécifications techniques</h3>
+                    <div class="specs-grid">
+                        {{#each product.specifications}}
+                        <div class="spec-item">
+                            <span class="spec-key">{{@key}}</span>
+                            <span class="spec-value">{{this}}</span>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+                {{/if}}
+                
+                <!-- Actions -->
+                <div class="product-detail-actions">
+                    {{#if product.isAvailable}}
+                    <button class="btn btn-primary btn-lg" id="order-btn" data-product-id="{{product._id}}">
+                        <span>🛒 Commander maintenant</span>
+                    </button>
+                    <div class="order-benefits">
+                        <p class="order-note">✓ Livraison rapide sous 24-48h</p>
+                        <p class="order-note">✓ Garantie constructeur incluse</p>
+                        <p class="order-note">✓ Paiement sécurisé</p>
+                    </div>
+                    {{else}}
+                    <button class="btn btn-secondary btn-lg" disabled>
+                        Indisponible
+                    </button>
+                    <p class="order-note">Ce produit n'est actuellement pas disponible. Contactez-nous pour être informé de sa disponibilité.</p>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        
+        {{#if relatedProducts.length}}
+        <div class="related-products">
+            <h2>Produits similaires</h2>
+            <div class="products-grid">
+                {{#each relatedProducts}}
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{image}}" alt="{{name}}" onerror="this.src='/images/placeholder.jpg'">
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">{{category}}</span>
+                        <h3 class="product-name">{{name}}</h3>
+                        <p class="product-price">{{formatPrice price}}</p>
+                        <a href="/products/{{_id}}" class="btn btn-primary btn-sm">Voir détails</a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</section>
+
+

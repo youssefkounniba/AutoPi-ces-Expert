@@ -1,0 +1,99 @@
+<section class="section products-section">
+    <div class="container">
+        <h1 class="page-title">Nos Produits</h1>
+        
+        <!-- Search and Filters -->
+        <div class="filters-container">
+            <form method="GET" action="/products" class="filters-form">
+                <div class="filter-group">
+                    <input type="text" name="search" placeholder="Rechercher un produit..." 
+                           value="{{currentSearch}}" class="filter-input">
+                </div>
+                
+                <div class="filter-group">
+                    <select name="category" class="filter-select">
+                        <option value="">Toutes les catégories</option>
+                        <option value="moteurs" {{#if (eq currentCategory 'moteurs')}}selected{{/if}}>Moteurs (tous types)</option>
+                        {{#each categories}}
+                        {{#unless (eq this 'Moteur')}}
+                        {{#unless (eq this 'Moteur Hydraulique')}}
+                        <option value="{{this}}" {{#if (eq this ../currentCategory)}}selected{{/if}}>{{this}}</option>
+                        {{/unless}}
+                        {{/unless}}
+                        {{/each}}
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <input type="number" name="minPrice" placeholder="Prix min" 
+                           value="{{currentMinPrice}}" class="filter-input" min="0" step="0.01">
+                </div>
+                
+                <div class="filter-group">
+                    <input type="number" name="maxPrice" placeholder="Prix max" 
+                           value="{{currentMaxPrice}}" class="filter-input" min="0" step="0.01">
+                </div>
+                
+                <div class="filter-group">
+                    <select name="sort" class="filter-select">
+                        <option value="newest" {{#if (eq currentSort 'newest')}}selected{{/if}}>Plus récents</option>
+                        <option value="price-asc" {{#if (eq currentSort 'price-asc')}}selected{{/if}}>Prix croissant</option>
+                        <option value="price-desc" {{#if (eq currentSort 'price-desc')}}selected{{/if}}>Prix décroissant</option>
+                        <option value="name-asc" {{#if (eq currentSort 'name-asc')}}selected{{/if}}>Nom A-Z</option>
+                        <option value="name-desc" {{#if (eq currentSort 'name-desc')}}selected{{/if}}>Nom Z-A</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Filtrer</button>
+                <a href="/products" class="btn btn-secondary">Réinitialiser</a>
+            </form>
+        </div>
+        
+        <!-- Products Count -->
+        {{#if products.length}}
+        <div class="products-count">
+            <p><strong>{{products.length}}</strong> produit{{#if (gt products.length 1)}}s{{/if}} trouvé{{#if (gt products.length 1)}}s{{/if}}</p>
+        </div>
+        {{/if}}
+        
+        <!-- Products Grid -->
+        {{#if products.length}}
+        <div class="products-grid">
+            {{#each products}}
+            <div class="product-card">
+                <div class="product-image">
+                    {{#if image}}
+                    <img src="{{image}}" alt="{{name}}" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&q=80';">
+                    {{else}}
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&q=80" alt="{{name}}" loading="lazy">
+                    {{/if}}
+                    {{#if isAvailable}}
+                    <span class="product-badge stock-badge">En stock</span>
+                    {{else}}
+                    <span class="product-badge out-of-stock-badge">Rupture</span>
+                    {{/if}}
+                </div>
+                <div class="product-info">
+                    <span class="product-category">{{category}}</span>
+                    <h3 class="product-name">{{name}}</h3>
+                    
+                    <div class="product-price-section">
+                        <p class="product-price">{{formatPrice price}}</p>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <a href="/products/{{_id}}" class="btn btn-primary btn-sm btn-block">Voir détails & Commander</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        {{else}}
+        <div class="no-results">
+            <p>Aucun produit trouvé avec ces critères.</p>
+            <a href="/products" class="btn btn-primary">Voir tous les produits</a>
+        </div>
+        {{/if}}
+    </div>
+</section>
+

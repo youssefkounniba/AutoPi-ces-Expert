@@ -32,7 +32,7 @@ Site e-commerce complet pour la vente de produits automobiles et moteurs, dével
 1. **Cloner ou télécharger le projet**
 
 ```bash
-cd /home/youssef/new_app
+cd /home/youssef/AutoPièces Expert
 ```
 
 2. **Installer les dépendances**

@@ -1,4 +1,4 @@
-# AutoMoteur Pro - E-commerce Website
+# AutoPièces Expert - E-commerce Website
 
 Site e-commerce complet pour la vente de produits automobiles et moteurs, développé avec Node.js, Express.js, Handlebars et MongoDB Atlas.
 
